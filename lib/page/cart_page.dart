@@ -16,14 +16,15 @@ class CartPage extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         CustomSliverHeader(
-          headerText: "Cart Items", onTap: () {},
+          headerText: 'Cart Items',
+          onTap: () {},
         ),
         StreamBuilder(
           stream: _bloc.cartItems,
           initialData: <String, int>{},
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data!.keys.isEmpty) {
-              return SliverFillRemaining(child: Text("Your cart is empty"));
+              return SliverFillRemaining(child: Text('Your cart is empty'));
             }
             return SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -55,7 +56,7 @@ class CartPage extends StatelessWidget {
                             '$_product removed from cart.',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .headline6!
                                 .copyWith(color: AppColors.accentTextColor),
                           ),
                         ),);
@@ -75,7 +76,7 @@ class CartPage extends StatelessWidget {
             child: Center(
               child: Text(
                 'Cart Total: 5.00',
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context).textTheme.headline3,
               ),
             ),
           ),

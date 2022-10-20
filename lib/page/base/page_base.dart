@@ -5,6 +5,7 @@
 
 import 'package:e_commerce/widget/appbar_cart_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 enum PageType { Catalog, Cart, Settings, ProductDetail, AddProductForm }
 
@@ -34,14 +35,16 @@ abstract class PageContainerBase extends StatelessWidget {
         Scaffold(
           backgroundColor: backgroundColor,
           appBar: AppBar(
-            brightness: Brightness.light,
+            iconTheme: IconThemeData(color: Colors.black),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             title: Text(pageTitle),
-            textTheme: Theme.of(context).primaryTextTheme,
             actions: <Widget>[
               AppBarCartIcon(),
             ],
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            toolbarTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
+            titleTextStyle: Theme.of(context).primaryTextTheme.headline6,
           ),
           drawer: menuDrawer,
           body: body,

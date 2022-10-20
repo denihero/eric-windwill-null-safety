@@ -35,17 +35,14 @@ class _ECommerceAppState extends State<ECommerceApp> {
             bodyColor: AppColors.displayTextColor,
             displayColor: AppColors.displayTextColor,
           ),
-      // ui -- contrasts 'accent color'
-      accentTextTheme: Theme.of(context).textTheme.apply(
-            bodyColor: AppColors.accentTextColor,
-            displayColor: AppColors.accentTextColor,
-          ),
       primaryColor: AppColors.primary,
-      accentColor: AppColors.accent,
       primaryIconTheme: Theme.of(context)
           .iconTheme
           .copyWith(color: AppColors.displayTextColor),
-      buttonColor: Colors.black54,
+       iconTheme: IconThemeData(color: Colors.green),
+       buttonTheme: ButtonThemeData(
+        buttonColor: Colors.black,
+      ),
     );
 
     return MaterialApp(

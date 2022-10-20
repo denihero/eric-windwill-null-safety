@@ -38,7 +38,7 @@ class CustomSliverHeader extends StatelessWidget {
                     decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
                     child: Text(
                       headerText,
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                   ),
                 ),

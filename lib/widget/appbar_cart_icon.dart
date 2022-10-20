@@ -49,7 +49,7 @@ class AppBarCartIcon extends StatelessWidget {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   return Text(
                     snapshot.data.toString(),
-                    style: TextStyle(fontSize: 8.0, color: Colors.white),
+                    style: TextStyle(fontSize: 11, color: Colors.white),
                     textAlign: TextAlign.center,
                   );
                 },

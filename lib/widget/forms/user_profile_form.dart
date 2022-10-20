@@ -16,39 +16,40 @@ class UserProfileForm extends StatefulWidget {
 }
 
 class _UserProfileFormState extends State<UserProfileForm> {
-  late TextEditingController _nameController;
-  late TextEditingController _emailController;
-  late UserBloc _bloc;
+  TextEditingController? _nameController;
+  TextEditingController? _emailController;
+  UserBloc? _bloc;
   bool _userInformationHasBeenUpdated = false;
-  late String _prevName;
-  late String _prevContact;
+  String? _prevName;
+  String? _prevContact;
+
 
   @override
   void didChangeDependencies() async {
     _bloc = AppStateContainer.of(context).blocProvider.userBloc;
-    var user = await _bloc.user.first.then((u) => u);
+    var user = await _bloc?.user.first.then((u) => u);
     _nameController = TextEditingController(text: user.name);
     _emailController = TextEditingController(text: user.contact);
 
-    _prevName = _nameController.text;
-    _prevContact = _emailController.text;
+    _prevName = _nameController?.text;
+    _prevContact = _emailController?.text;
 
-    _nameController.addListener(onChangeName);
-    _emailController.addListener(onChangeEmail);
+    _nameController?.addListener(onChangeName);
+    _emailController?.addListener(onChangeEmail);
     super.didChangeDependencies();
   }
 
   void onChangeName() {
-    if (_prevName == _nameController.text &&
-        _prevContact == _emailController.text) return;
+    if (_prevName == _nameController?.text &&
+        _prevContact == _emailController?.text) return;
     setState(() {
       _userInformationHasBeenUpdated = true;
     });
   }
 
   void onChangeEmail() {
-    if (_prevName == _nameController.text &&
-        _prevContact == _emailController.text) return;
+    if (_prevName == _nameController?.text &&
+        _prevContact == _emailController?.text) return;
     setState(() {
       _userInformationHasBeenUpdated = true;
     });
@@ -57,11 +58,11 @@ class _UserProfileFormState extends State<UserProfileForm> {
   ElevatedButton get submitButton => ElevatedButton(
         onPressed: _userInformationHasBeenUpdated
             ? () {
-                _bloc.updateUserInformationSink.add(
+                _bloc?.updateUserInformationSink.add(
                   UpdateUserEvent(
                     ECommerceUser(
-                        name: _nameController.text,
-                        contact: _emailController.text),
+                        name: _nameController?.text,
+                        contact: _emailController?.text),
                   ),
                 );
                 showDialog(
@@ -69,7 +70,7 @@ class _UserProfileFormState extends State<UserProfileForm> {
                     builder: (context) {
                       return AlertDialog(
                         content: Text(
-                            'Submitted Name: ${_nameController.text}, Submitted Contact: ${_emailController.text}'),
+                            'Submitted Name: ${_nameController?.text}, Submitted Contact: ${_emailController?.text}'),
                       );
                     });
               }

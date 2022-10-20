@@ -43,7 +43,6 @@ class CatalogState extends State<Catalog> {
         builder: (context) => ProductDetailPageContainer(
           product: product,
         ),
-        settings: null,
       ),
     );
   }
@@ -55,7 +54,7 @@ class CatalogState extends State<Catalog> {
         context: context,
         builder: (BuildContext context) {
           return AddToCartBottomSheet(
-            key: Key(product.id!),
+            //key: Key(product.id),
           );
         });
 
@@ -73,11 +72,11 @@ class CatalogState extends State<Catalog> {
     _bloc.productStreamsByCategory.forEach((Stream<List<Product>> dataStream) {
       slivers.add(StreamBuilder(
           stream: dataStream,
-          builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+          builder: (context, AsyncSnapshot<List<Product?>>? snapshot) {
             return CustomSliverHeader(
               onTap: (String text) => print(text),
               headerText:
-                  Humanize.productCategoryFromEnum(snapshot.data!.first.category!), scrollPosition: null,
+                  Humanize.productCategoryFromEnum(snapshot?.data?.first?.category),
             );
           }));
       slivers.add(StreamBuilder(

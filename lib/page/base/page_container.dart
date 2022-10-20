@@ -61,7 +61,7 @@ class PageContainer extends PageContainerBase {
   }
 
   @override
-  Widget get background => Container();
+  Widget get background => Container(color: Colors.red);
 
   @override
   Color get backgroundColor => AppColors.background;
@@ -79,7 +79,7 @@ class ProductDetailPageContainer extends PageContainerBase {
   String get pageTitle => "";
 
   @override
-  Widget get menuDrawer => Drawer();
+  Widget get menuDrawer => AppMenu();
 
   @override
   Widget get background => BackgroundImage(

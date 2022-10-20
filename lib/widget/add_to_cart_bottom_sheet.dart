@@ -16,7 +16,7 @@ class AddToCartBottomSheet extends StatefulWidget {
 
 class _AddToCartBottomSheetState extends State<AddToCartBottomSheet> {
   int _quantity = 0;
-  late AppState state;
+  AppState? state;
 
   @override
   void didChangeDependencies() {
@@ -39,7 +39,7 @@ class _AddToCartBottomSheetState extends State<AddToCartBottomSheet> {
             padding: EdgeInsets.all(Spacing.matGridUnit()),
             child: Text(
               'Add item to Cart',
-              style: Theme.of(context).primaryTextTheme.displayLarge,
+              style: Theme.of(context).primaryTextTheme.headline5,
             ),
           ),
           Padding(
@@ -57,7 +57,7 @@ class _AddToCartBottomSheetState extends State<AddToCartBottomSheet> {
                     }),
                 Text(
                   _quantity.toString(),
-                  style: Theme.of(context).primaryTextTheme.headline1,
+                  style: Theme.of(context).primaryTextTheme.headline3,
                 ),
                 IconButton(
                   iconSize: 40.0,

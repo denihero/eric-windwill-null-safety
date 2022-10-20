@@ -17,8 +17,8 @@ class AppMenu extends StatefulWidget {
 }
 
 class AppMenuState extends State<AppMenu> with RouteAware {
-  late String _activeRoute;
-  late UserBloc _bloc;
+  String? _activeRoute;
+  UserBloc? _bloc;
 
   @override
   void didChangeDependencies() {
@@ -45,7 +45,7 @@ class AppMenuState extends State<AppMenu> with RouteAware {
         children: <Widget>[
           StreamBuilder(
             initialData: ECommerceUser(name: '', contact: ''),
-            stream: _bloc.user,
+            stream: _bloc?.user,
             builder: (BuildContext context, AsyncSnapshot s) =>
                 UserAccountsDrawerHeader(
                   currentAccountPicture: CircleAvatar(
