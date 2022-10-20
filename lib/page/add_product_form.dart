@@ -3,6 +3,7 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
+
 import 'dart:io';
 
 import 'package:e_commerce/blocs/app_state.dart';
@@ -212,7 +213,7 @@ class _AddProductFormState extends State<AddProductForm> {
             onPressed: () async {
               var image = await ImagePicker().pickImage(source: ImageSource.gallery);
               setState(() {
-                _selected = image as File?;
+                _selected = File(image!.path);
               });
             },
           ),
