@@ -19,7 +19,7 @@ abstract class PageContainerBase extends StatelessWidget {
 
   Color get backgroundColor;
 
-  const PageContainerBase({Key key}) : super(key: key);
+  const PageContainerBase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

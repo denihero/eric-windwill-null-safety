@@ -16,20 +16,20 @@ class CartPage extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         CustomSliverHeader(
-          headerText: "Cart Items",
+          headerText: "Cart Items", onTap: () {},
         ),
         StreamBuilder(
           stream: _bloc.cartItems,
           initialData: <String, int>{},
-          builder: (BuildContext context, AsyncSnapshot<Map<String, int>> snapshot) {
-            if (snapshot.data.keys.isEmpty) {
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.data!.keys.isEmpty) {
               return SliverFillRemaining(child: Text("Your cart is empty"));
             }
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  var _product = snapshot.data.keys.toList()[index];
-                  var qty = snapshot.data[_product];
+                  var _product = snapshot.data!.keys.toList()[index];
+                  var qty = snapshot.data![_product];
                   return Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -48,24 +48,22 @@ class CartPage extends StatelessWidget {
                         ),
                       ),
                       onDismissed: (DismissDirection dir) {
-                        _bloc.removeFromCartSink.add(RemoveFromCartEvent(_product, qty));
-                        Scaffold.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: AppColors.primary,
-                            content: Text(
-                              "$_product removed from cart.",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline
-                                  .copyWith(color: AppColors.accentTextColor),
-                            ),
+                        _bloc.removeFromCartSink.add(RemoveFromCartEvent(_product, qty!));
+                        ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                          backgroundColor: AppColors.primary,
+                          content: Text(
+                            '$_product removed from cart.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline1!
+                                .copyWith(color: AppColors.accentTextColor),
                           ),
-                        );
+                        ),);
                       },
                     ),
                   );
                 },
-                childCount: snapshot.data.keys.toList().length,
+                childCount: snapshot.data!.keys.toList().length,
               ),
             );
           },
@@ -76,8 +74,8 @@ class CartPage extends StatelessWidget {
             maxHeight: Spacing.matGridUnit(scale: 8),
             child: Center(
               child: Text(
-                "Cart Total: 5.00",
-                style: Theme.of(context).textTheme.headline,
+                'Cart Total: 5.00',
+                style: Theme.of(context).textTheme.headline1,
               ),
             ),
           ),

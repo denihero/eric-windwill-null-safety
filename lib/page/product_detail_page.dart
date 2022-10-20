@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 class ProductDetailPage extends StatefulWidget {
   final Product product;
 
-  const ProductDetailPage({Key key, this.product}) : super(key: key);
+  const ProductDetailPage({Key? key, required this.product}) : super(key: key);
 
   @override
   ProductDetailPageState createState() {
@@ -38,7 +38,10 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(25.0),
                 boxShadow: [
-                  BoxShadow(color: Colors.black26, offset: Offset(1.0, 1.0), blurRadius: 1.0),
+                  BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(1.0, 1.0),
+                      blurRadius: 1.0),
                 ]),
             width: MediaQuery.of(context).size.width - 40.0,
             child: Column(
@@ -52,39 +55,40 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.product.title,
+                          widget.product.title!,
                           style: Theme.of(context)
                               .textTheme
-                              .display1
+                              .headline4!
                               .copyWith(color: AppColors.displayTextColor),
                         ),
                         Text(
                           widget.product.category.toString(),
                           style: Theme.of(context)
                               .textTheme
-                              .subhead
+                              .subtitle1!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                     Text(
-                      "\$ ${widget.product.cost} / lb",
+                      '\$ ${widget.product.cost} / lb',
                       style: Theme.of(context)
                           .textTheme
-                          .headline
+                          .headline1!
                           .copyWith(color: AppColors.displayTextColor),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: Spacing.matGridUnit(scale: 2)),
+                  padding: EdgeInsets.symmetric(
+                      vertical: Spacing.matGridUnit(scale: 2)),
                   child: Row(
                     children: <Widget>[
                       Flexible(
                         flex: 1,
                         child: Hero(
                           tag: widget.product.uniqueId,
-                          child: Image.asset(widget.product.imageUrl),
+                          child: Image.asset(widget.product.imageUrl!),
                         ),
                       ),
                       Flexible(
@@ -92,7 +96,7 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                              "This is a nice ${widget.product.title} thing you can buy and eat to grow strong."),
+                              'This is a nice ${widget.product.title} thing you can buy and eat to grow strong.'),
                         ),
                       ),
                     ],
@@ -111,7 +115,7 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     Text(
                       _quantity.toString(),
-                      style: Theme.of(context).primaryTextTheme.headline,
+                      style: Theme.of(context).primaryTextTheme.headline1,
                     ),
                     IconButton(
                       onPressed: () {
@@ -119,12 +123,15 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                       },
                       icon: Icon(Icons.add),
                     ),
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
-                      onPressed: () =>
-                          _cartBloc.addProductSink.add(AddToCartEvent(widget.product, _quantity)),
-                      textColor: Colors.white,
-                      child: Text("Add to Cart"),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0)),
+                      )),
+                      onPressed: () => _cartBloc.addProductSink
+                          .add(AddToCartEvent(widget.product, _quantity)),
+                      child: Text('Add to Cart'),
                     ),
                   ],
                 )

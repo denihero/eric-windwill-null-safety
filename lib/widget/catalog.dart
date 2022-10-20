@@ -43,6 +43,7 @@ class CatalogState extends State<Catalog> {
         builder: (context) => ProductDetailPageContainer(
           product: product,
         ),
+        settings: null,
       ),
     );
   }
@@ -76,7 +77,7 @@ class CatalogState extends State<Catalog> {
             return CustomSliverHeader(
               onTap: (String text) => print(text),
               headerText:
-                  Humanize.productCategoryFromEnum(snapshot.data!.first.category!),
+                  Humanize.productCategoryFromEnum(snapshot.data!.first.category!), scrollPosition: null,
             );
           }));
       slivers.add(StreamBuilder(

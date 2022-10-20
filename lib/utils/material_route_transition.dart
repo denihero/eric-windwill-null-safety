@@ -6,13 +6,13 @@
 import 'package:flutter/material.dart';
 
 class FadeInSlideOutRoute<T> extends MaterialPageRoute<T> {
-  FadeInSlideOutRoute({WidgetBuilder builder, RouteSettings settings})
+  FadeInSlideOutRoute({required WidgetBuilder builder, RouteSettings? settings})
       : super(builder: builder, settings: settings);
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    if (settings.isInitialRoute) return child;
+    if (settings.name != null) return child;
 
     if (animation.status == AnimationStatus.reverse) {
       return super.buildTransitions(context, animation, secondaryAnimation, child);

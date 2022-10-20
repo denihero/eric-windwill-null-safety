@@ -14,16 +14,16 @@ class AppStateContainer extends StatefulWidget {
   final Widget child;
   final BlocProvider blocProvider;
   const AppStateContainer({
-    Key key,
-    @required this.child,
-    @required this.blocProvider,
+    Key? key,
+    required this.child,
+    required this.blocProvider,
   }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => AppState();
 
   static AppState of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(_AppStoreContainer) as _AppStoreContainer).appData;
+    return (context.dependOnInheritedWidgetOfExactType<_AppStoreContainer>() as _AppStoreContainer).appData;
   }
 }
 
@@ -39,6 +39,7 @@ class AppState extends State<AppStateContainer> {
     );
   }
 
+  @override
   void dispose() {
     super.dispose();
   }
@@ -55,10 +56,10 @@ class _AppStoreContainer extends InheritedWidget {
   final BlocProvider blocProvider;
 
   _AppStoreContainer({
-    Key key,
-    @required this.appData,
-    @required child,
-    @required this.blocProvider,
+    Key? key,
+    required this.appData,
+    required child,
+    required this.blocProvider,
   }) : super(key: key, child: child);
 
   @override
@@ -70,8 +71,8 @@ class ServiceProvider {
   final CartService cartService;
 
   ServiceProvider({
-    @required this.catalogService,
-    @required this.cartService,
+    required this.catalogService,
+    required this.cartService,
   });
 }
 
@@ -81,8 +82,8 @@ class BlocProvider {
   UserBloc userBloc;
 
   BlocProvider({
-    @required this.cartBloc,
-    @required this.catalogBloc,
-    @required this.userBloc,
+    required this.cartBloc,
+    required this.catalogBloc,
+    required this.userBloc,
   });
 }

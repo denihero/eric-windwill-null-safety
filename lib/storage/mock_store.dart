@@ -14,9 +14,9 @@ import 'package:e_commerce/utils/generate_cart_data.dart';
 /// updates a datasource that *isn't* persistent,
 /// then notifies listeners.
 class AppStore {
-  Cart _cart;
-  Catalog _catalog;
-  ECommerceUser _user;
+  Cart? _cart;
+  Catalog? _catalog;
+  ECommerceUser? _user;
 
   StreamController<Cart> cartNotifier = StreamController<Cart>.broadcast();
   StreamController<Catalog> catalogNotifier = StreamController<Catalog>.broadcast();
@@ -29,27 +29,27 @@ class AppStore {
     _user = ECommerceUser(name: "Eric Windmill", contact: "eric@ericwindmill.com", userProducts: []);
     // emit initial events, notifying the UI
     Future.delayed(Duration(milliseconds: 500), () {
-      catalogNotifier.add(_catalog);
-      cartNotifier.add(_cart);
-      userNotifier.add(_user);
+      catalogNotifier.add(_catalog!);
+      cartNotifier.add(_cart!);
+      userNotifier.add(_user!);
     });
   }
 
-  Cart get cart => _cart;
+  Cart get cart => _cart!;
 
   set cart(Cart c) {
     _cart = c;
     cartNotifier.add(c);
   }
 
-  Catalog get catalog => _catalog;
+  Catalog get catalog => _catalog!;
 
   set catalog(Catalog c) {
     _catalog = c;
     catalogNotifier.add(c);
   }
 
-  ECommerceUser get user => _user;
+  ECommerceUser get user => _user!;
 
   set user(ECommerceUser c) {
     _user = c;

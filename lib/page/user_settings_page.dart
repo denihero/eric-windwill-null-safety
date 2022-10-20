@@ -21,25 +21,30 @@ class UserSettingsPage extends StatelessWidget {
         CustomScrollView(
           slivers: <Widget>[
             CustomSliverHeader(
-              headerText: "Profile",
+              headerText: 'Profile',
+              onTap: () {},
             ),
             SliverToBoxAdapter(
               child: UserProfileForm(),
             ),
             CustomSliverHeader(
-              headerText: "My Products",
+              headerText: 'My Products',
+              onTap: () {},
             ),
-            StreamBuilder<ECommerceUser>(
+            StreamBuilder(
               stream: _bloc.user,
               initialData: ECommerceUser(userProducts: []),
-              builder: (BuildContext context, AsyncSnapshot<ECommerceUser> snapshot) {
+              builder: (BuildContext context,
+                  AsyncSnapshot snapshot) {
                 return SliverList(
-                  delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                    var _product = snapshot.data.userProducts[index];
+                  delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    var _product = snapshot.data?.userProducts![index];
                     return Container(
                         decoration: BoxDecoration(
                           border: Border(
-                            bottom: BorderSide(width: .5, color: Colors.black54),
+                            bottom:
+                                BorderSide(width: .5, color: Colors.black54),
                           ),
                         ),
                         child: Dismissible(
@@ -48,25 +53,23 @@ class UserSettingsPage extends StatelessWidget {
                           key: Key(_product.toString()),
                           child: Container(
                             child: ListTile(
-                              title: Text(_product.title),
+                              title: Text(_product!.title!),
                             ),
                           ),
                           onDismissed: (DismissDirection dir) {
-                            Scaffold.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: AppColors.primary,
-                                content: Text(
-                                  "${_product.title} deleted.",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline
-                                      .copyWith(color: AppColors.accentTextColor),
-                                ),
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: AppColors.primary,
+                              content: Text(
+                                '${_product.title} deleted.',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .copyWith(color: AppColors.accentTextColor),
                               ),
-                            );
+                            ));
                           },
                         ));
-                  }, childCount: snapshot.data.userProducts.length),
+                  }, childCount: snapshot.data?.userProducts?.length),
                 );
               },
             )

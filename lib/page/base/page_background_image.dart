@@ -7,9 +7,9 @@ import 'package:e_commerce/models/product.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundImage extends StatelessWidget {
-  final ImageTitle imageTitle;
+  final ImageTitle? imageTitle;
 
-  const BackgroundImage({Key key, this.imageTitle}) : super(key: key);
+  const BackgroundImage({Key? key, this.imageTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

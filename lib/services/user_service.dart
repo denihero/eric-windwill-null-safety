@@ -25,7 +25,7 @@ class MockUserService implements UserService {
 
   @override
   Future addUserProduct(Product p) async {
-    store.user.userProducts.add(p);
+    store.user.userProducts!.add(p);
   }
 
   @override
